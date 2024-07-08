@@ -1,0 +1,27 @@
+[package]
+name = "zk-imp"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+bellpepper = "0.4.1"
+bellman = "0.14.0"
+blake = "2.0.2"
+blake2 = "0.10.6"
+rand = "0.8.5"
+pairing = "0.23.0"
+ff = "0.13.0"
+merkletree = "0.23.0"
+sha2 = "0.10.8"
+bls12_381 = "0.8.0"
+neptune = "13.0.0"
+generic-array = "1.0.0"
+pasta_curves = "0.5.1"
+bellpepper-core = "0.4.0"
+subtle = "2.6.1"
+
+[lib]
+name = "zk_imp"
+path = "src/lib.rs"
