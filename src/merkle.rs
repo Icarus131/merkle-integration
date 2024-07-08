@@ -28,13 +28,13 @@ impl<F: PrimeField + PrimeFieldBits> Element<F> {
 }
 
 #[derive(Clone, Debug)]
-pub struct BinaryTree<F: PrimeField + PrimeFieldBits> {
+pub struct MerkleTree<F: PrimeField + PrimeFieldBits> {
     pub top: Vec<u8>,
     pub data_store: HashMap<Vec<u8>, (Vec<u8>, Vec<u8>)>,
     pub _marker: PhantomData<F>,
 }
 
-impl<F: PrimeField + PrimeFieldBits> BinaryTree<F> {
+impl<F: PrimeField + PrimeFieldBits> MerkleTree<F> {
     pub fn initialize(empty_value: Element<F>, height: usize) -> Self {
         let mut data_store = HashMap::<Vec<u8>, (Vec<u8>, Vec<u8>)>::new();
         let mut current_hash = empty_value.compute_hash();
@@ -115,7 +115,7 @@ impl Proof {
             } else {
                 (&current_hash, sibling)
             };
-            current_hash = BinaryTree::<F>::combine_hashes(left, right);
+            current_hash = MerkleTree::<F>::combine_hashes(left, right);
         }
         current_hash
     }
@@ -137,10 +137,10 @@ mod tests {
     use pasta_curves::Fp;
 
     #[test]
-    fn binary_tree_test() {
+    fn check_leaves() {
         const HEIGHT: usize = 32;
         let empty_element = Element::<Fp>::default();
-        let mut tree = BinaryTree::<Fp>::initialize(empty_element.clone(), HEIGHT);
+        let mut tree = MerkleTree::<Fp>::initialize(empty_element.clone(), HEIGHT);
 
         for i in 0..50 {
             let index = i;
